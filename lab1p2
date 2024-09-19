@@ -1,0 +1,18 @@
+module mux4bit (
+    input [3:0] X,      // 4-bit input X (SW3-0)
+    input [3:0] Y,      // 4-bit input Y (SW7-4)
+    input s,            // Select input (SW9)
+    output [3:0] M,     // 4-bit output M (LEDR3-0)
+    output LEDR9        // LEDR9 displays the value of s
+);
+
+// Assign the select line to LEDR9 for display
+assign LEDR9 = s;
+
+// Implement the 4-bit wide 2-to-1 multiplexer using bitwise assignments
+assign M[0] = (~s & X[0]) | (s & Y[0]);
+assign M[1] = (~s & X[1]) | (s & Y[1]);
+assign M[2] = (~s & X[2]) | (s & Y[2]);
+assign M[3] = (~s & X[3]) | (s & Y[3]);
+
+endmodule
